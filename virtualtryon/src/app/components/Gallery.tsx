@@ -1,8 +1,5 @@
-import { client } from "../../sanity/lib/client"
-import imageUrlBuilder from "@sanity/image-url"
-
-const builder = imageUrlBuilder(client)
-const urlFor = (source: any) => builder.image(source)
+import { client } from "@/sanity/lib/client"
+import { urlFor } from "@/sanity/lib/image"
 
 async function getGallery() {
   return await client.fetch(`*[_type == "gallery"][0]`)
@@ -19,12 +16,21 @@ export default async function Gallery() {
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {gallery?.images?.map((img: any, i: number) => (
-          <img
-            key={i}
-            src={urlFor(img).url()}
-            className="rounded-lg object-cover w-full h-100 object-[center_20%]"
-            alt="gallery"
-          />
+          <div key={i} className="aspect-[3/4] w-full overflow-hidden rounded-lg">
+            
+            {img?.asset?._ref ? (
+              <img
+                src={urlFor(img).auto("format").quality(80).url()}
+                className="w-full h-full object-cover object-[center_20%] hover:scale-105 transition duration-500"
+                alt="gallery"
+              />
+            ) : (
+              <div className="flex items-center justify-center h-full bg-gray-100">
+                No Image
+              </div>
+            )}
+
+          </div>
         ))}
       </div>
     </section>

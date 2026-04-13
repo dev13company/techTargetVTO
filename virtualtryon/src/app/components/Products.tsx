@@ -1,16 +1,15 @@
-import { client } from "../../sanity/lib/client"
-import imageUrlBuilder from "@sanity/image-url"
-
-const builder = imageUrlBuilder(client)
-const urlFor = (source: any) => builder.image(source)
+import { client } from "@/sanity/lib/client"
+import { urlFor } from "@/sanity/lib/image"
 
 async function getProducts() {
-  return await client.fetch(`*[_type == "product" && featured == true][0...6]`)
+  return await client.fetch(
+    `*[_type == "product" && featured == true][0...6]`
+  )
 }
 
 export default async function Products() {
   const products = await getProducts()
-  
+
   return (
     <section className="py-16 px-6 md:px-20">
       <h2 className="text-3xl mb-10 text-center font-serif">
@@ -18,23 +17,33 @@ export default async function Products() {
       </h2>
 
       <div className="grid md:grid-cols-3 gap-8">
-        {products.map((p: any) => (
-        
-          <div key={p._id} className="bg-white rounded-xl shadow">
-            {p.images?.[0] && (
-                console.log("PRODUCT:", p, "IMAGE URL:", urlFor(p.images[0]).url()), // Debug log
-                console.log("ASSET REF:", p.images?.[0]?.asset?._ref), // Debug log for asset reference
-              <img
-                src={urlFor(p.images[0]).url()}
-                className="w-full h-100 object-cover object-[center_20%]"
-                alt={p.name}
-              />
-            )}
+        {products?.map((p: any) => (
+          <div key={p._id} className="bg-white rounded-xl shadow overflow-hidden">
 
-            <div className="p-4">
-              <h3 className="font-semibold">{p.name}</h3>
-              <p className="text-[#D4AF37]">₹{p.price}</p>
+            {/* Image */}
+            <div className="aspect-[3/4] w-full overflow-hidden">
+              {p.images?.[0]?.asset?._ref ? (
+                <img
+                  src={urlFor(p.images[0])
+                    .auto("format")
+                    .quality(80)
+                    .url()}
+                  className="w-full h-full object-cover object-[center_20%] hover:scale-105 transition duration-500"
+                  alt={p.name}
+                />
+              ) : (
+                <div className="flex items-center justify-center h-full bg-gray-100">
+                  No Image
+                </div>
+              )}
             </div>
+
+            {/* Content */}
+            <div className="p-4">
+              <h3 className="font-semibold text-lg">{p.name}</h3>
+              <p className="text-[#D4AF37] mt-1">₹{p.price}</p>
+            </div>
+
           </div>
         ))}
       </div>
