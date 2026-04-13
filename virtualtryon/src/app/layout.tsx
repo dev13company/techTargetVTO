@@ -1,23 +1,40 @@
-import "./globals.css"
-import Navbar from "./components/Navbar"
-import { Cinzel } from "next/font/google"
+import { Playfair_Display, Inter } from "next/font/google";
+import { Analytics } from '@vercel/analytics/next';
+import type { ReactNode } from "react";
+import "./globals.css";
 
-const cinzel = Cinzel({
+const playfair = Playfair_Display({
   subsets: ["latin"],
-  weight: ["700"], // Bold
-})
+  weight: ["400", "600", "700"],
+  variable: "--font-playfair",
+});
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+});
+
+export const metadata = {
+  title: "Berachah Ministries Gachibowli",
+  description: "A Place of Blessing & Worship",
+  icons: {
+    icon: "/icon.png",
+    shortcut: "/favicon.ico",
+    apple: "/icon.png",
+  },
+};
+
+interface RootLayoutProps {
+  children: ReactNode;
+}
+
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en">
-      <body className={cinzel.className}>
-        <Navbar />
+    <html lang="en" className={`${playfair.variable} ${inter.variable}`}>
+      <body className="font-sans bg-white text-[#0B4268]">
         {children}
+        <Analytics />
       </body>
     </html>
-  )
+  );
 }

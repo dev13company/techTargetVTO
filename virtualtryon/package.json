@@ -1,5 +1,5 @@
 {
-  "name": "virtualtryon",
+  "name": "bwcg",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,28 +9,33 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "@sanity/client": "^6.19.2",
+    "@next/font": "^14.2.15",
     "@sanity/image-url": "^1.2.0",
-    "@sanity/vision": "^4.22.0",
+    "@sanity/vision": "^4.11.0",
     "@tailwindcss/aspect-ratio": "^0.4.2",
-    "autoprefixer": "^10.4.23",
-    "next": "16.1.4",
-    "next-sanity": "11.6.12",
-    "postcss": "^8.5.6",
-    "react": "19.2.3",
-    "react-dom": "19.2.3",
-    "sanity": "^4.22.0",
-    "styled-components": "^6.4.0",
-    "tailwindcss": "^3.4.3"
+    "@vercel/analytics": "^1.6.1",
+    "next": "^16.1.1",
+    "next-sanity": "^11.5.6",
+    "react": "19.2.1",
+    "react-dom": "19.2.1",
+    "react-icons": "^5.5.0",
+    "react-responsive-carousel": "^3.2.23",
+    "resend": "^6.6.0",
+    "sanity": "^4.11.0",
+    "styled-components": "^6.1.19"
   },
   "devDependencies": {
-    "@types/node": "^20",
+    "@types/node": "18.19.0",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "autoprefixer": "^10.4.21",
     "eslint": "^9",
-    "eslint-config-next": "16.1.4",
+    "eslint-config-next": "16.0.0",
     "postcss": "^8.5.6",
     "tailwindcss": "^3.4.3",
     "typescript": "^5"
+  },
+  "resolutions": {
+    "@sanity/client": "6.x"
   }
 }

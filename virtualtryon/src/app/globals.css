@@ -1,3 +1,56 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* :root {
+  --font-playfair: 'Playfair Display', serif;
+  --font-inter: 'Inter', sans-serif;
+}
+
+.font-sans {
+  font-family: var(--font-inter);
+}
+
+.font-serif {
+  font-family: var(--font-playfair);
+} */
+
+/* --- Custom Global Styles --- */
+html, body {
+  scroll-behavior: smooth;
+  font-family: 'Inter', sans-serif;
+  background-color: #000000;
+  color: #0b4268;
+  margin: 0;
+  padding: 0;
+}
+
+/* Optional: smooth transition effects */
+a, button {
+  transition: all 0.2s ease-in-out;
+}
+
+/* -------------------------------------
+   Header + Section Layout Fix
+-------------------------------------- */
+
+/* 1️⃣ Define your header height as a variable */
+:root {
+  --header-height: 5rem; /* matches Tailwind class h-20 (~80px) */
+}
+
+/* 2️⃣ All sections auto-offset scroll positions */
+section {
+  scroll-margin-top: var(--header-height);
+}
+
+/* 3️⃣ Utility class for hero sections */
+.hero-section {
+  margin-top: var(--header-height); /* pushes below fixed header */
+  min-height: calc(115vh - var(--header-height)); /* fills remaining viewport */
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
