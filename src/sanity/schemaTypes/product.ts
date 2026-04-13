@@ -1,14 +1,40 @@
 import { defineType, defineField } from "sanity"
 
-const gallery ={
-  name: "gallery",
-  title: "Gallery",
+const product = {
+  name: "product",
+  title: "Product",
   type: "document",
   fields: [
     defineField({
-      name: "title",
+      name: "name",
+      title: "Product Name",
       type: "string",
-      title: "Title",
+      validation: Rule => Rule.required(),
+    }),
+    defineField({
+      name: "slug",
+      title: "Slug",
+      type: "slug",
+      options: { source: "name", maxLength: 96 },
+      validation: Rule => Rule.required(),
+    }),
+    defineField({
+      name: "price",
+      title: "Price",
+      type: "number",
+    }),
+    defineField({
+      name: "category",
+      title: "Category",
+      type: "string",
+      options: {
+        list: [
+          { title: "Bridal Gowns", value: "gowns" },
+          { title: "Lehengas", value: "lehengas" },
+          { title: "Sarees", value: "sarees" },
+          { title: "Dresses", value: "dresses" },
+        ],
+      },
     }),
     defineField({
       name: "images",
@@ -17,12 +43,17 @@ const gallery ={
       of: [{ type: "image", options: { hotspot: true } }],
     }),
     defineField({
-      name: "publishedAt",
-      title: "Published At",
-      type: "datetime",
-      initialValue: () => new Date().toISOString(),
+      name: "description",
+      title: "Description",
+      type: "text",
+    }),
+    defineField({
+      name: "featured",
+      title: "Featured",
+      type: "boolean",
+      initialValue: false,
     }),
   ],
 }
 
-export default gallery
+export default product
