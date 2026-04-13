@@ -8,12 +8,9 @@ async function getProducts() {
   return await client.fetch(`*[_type == "product" && featured == true][0...6]`)
 }
 
-console.log("PROJECT:", process.env.NEXT_PUBLIC_SANITY_PROJECT_ID)
-console.log("DATASET:", process.env.NEXT_PUBLIC_SANITY_DATASET)
-
 export default async function Products() {
   const products = await getProducts()
-
+  
   return (
     <section className="py-16 px-6 md:px-20">
       <h2 className="text-3xl mb-10 text-center font-serif">
@@ -22,8 +19,10 @@ export default async function Products() {
 
       <div className="grid md:grid-cols-3 gap-8">
         {products.map((p: any) => (
+        
           <div key={p._id} className="bg-white rounded-xl shadow">
             {p.images?.[0] && (
+                console.log("PRODUCT:", p, "IMAGE URL:", urlFor(p.images[0]).url()), // Debug log
               <img
                 src={urlFor(p.images[0]).url()}
                 className="w-full h-100 object-cover object-[center_20%]"
