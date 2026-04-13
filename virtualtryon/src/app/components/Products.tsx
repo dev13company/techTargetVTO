@@ -8,6 +8,9 @@ async function getProducts() {
   return await client.fetch(`*[_type == "product" && featured == true][0...6]`)
 }
 
+console.log("PROJECT:", process.env.NEXT_PUBLIC_SANITY_PROJECT_ID)
+console.log("DATASET:", process.env.NEXT_PUBLIC_SANITY_DATASET)
+
 export default async function Products() {
   const products = await getProducts()
 
