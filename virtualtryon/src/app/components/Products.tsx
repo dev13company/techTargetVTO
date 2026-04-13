@@ -23,6 +23,7 @@ export default async function Products() {
           <div key={p._id} className="bg-white rounded-xl shadow">
             {p.images?.[0] && (
                 console.log("PRODUCT:", p, "IMAGE URL:", urlFor(p.images[0]).url()), // Debug log
+                console.log("ASSET REF:", p.images?.[0]?.asset?._ref), // Debug log for asset reference
               <img
                 src={urlFor(p.images[0]).url()}
                 className="w-full h-100 object-cover object-[center_20%]"
