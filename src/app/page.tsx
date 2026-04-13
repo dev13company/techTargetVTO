@@ -3,7 +3,7 @@ export const dynamic = "force-dynamic"
 import Hero from "./components/Hero"
 import Categories from "./components/Categories"
 import Products from "./components/Products"
-// import Gallery from "./components/Gallery"
+import Gallery from "./components/Gallery"
 
 export default function Home() {
   return (
@@ -11,7 +11,7 @@ export default function Home() {
       <Hero />
       <Categories/>
       <Products />
-      {/* <Gallery /> */}
+      <Gallery />
     </main>
   )
 }
